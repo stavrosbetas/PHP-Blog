@@ -3,13 +3,22 @@
 	// Create DB object
 	$db = new Database();
 
+  // Check url for category
+  	if(isset($_GET['category'])){
+  		$category = $_GET['category'];
+
+  // Create Query
+  $query = "SELECT * FROM posts WHERE category = ".$category;
+
+
+}else{
 	// Create Query
 	$query= "SELECT * FROM posts";
 
 	// Run Query
 
 	$posts = $db->select($query);
-
+}
   // Create Query
 	$query= "SELECT * FROM categories";
 
