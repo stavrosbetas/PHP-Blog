@@ -1,22 +1,38 @@
 <?php include 'includes/header.php'?>
+<?php
+	// Create DB object
+	$db = new Database();
 
+	// Create Query
+	$query= "SELECT * FROM posts";
+
+	// Run Query
+
+	$posts = $db->select($query);
+
+  // Create Query
+	$query= "SELECT * FROM categories";
+
+  // Run Query
+
+	$categories = $db->select($query);
+
+?>
+
+<?php if($posts) : ?>
+	<?php while($row = $posts->fetch_assoc()) : ?>
           <div class="blog-post">
-            <h2 class="blog-post-title">Post 1 PHP</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+            <h2 class="blog-post-title"><?php echo $row['title']; ?></h2>
+            <p class="blog-post-meta"><?php echo formatDate($row['date']); ?> by :  <a href="#"><?php echo $row['author']; ?></a></p>
 
-            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-			<a class="readmore" href="post.php?id=1">Read More</a>
-           
+            <p><?php echo shortenText($row['body']); ?></p>
+			<a class="readmore" href="post.php?id=<?php echo urlencode($row['id']); ?>">Read More</a>
+
           </div><!-- /.blog-post -->
 
-          <div class="blog-post">
-            <h2 class="blog-post-title">Post 2 News</h2>
-            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+	<?php endwhile; ?>
 
-            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-
-			<a class="readmore" href="post.php?id=1">Read More</a>
-          </div><!-- /.blog-post -->
-
+	<?php else : ?>
+			<p>There are no posts yet!</p>
+<?php endif; ?>
 <?php include 'includes/footer.php'?>
-
