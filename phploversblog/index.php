@@ -1,7 +1,4 @@
 <?php include 'includes/header.php'?>
-<?php include 'config/config.php'?>
-<?php include 'libraries/database.php'?>
-<?php include 'helpers/format_helper.php'?>
 <?php
 	// Create DB object
 	$db = new Database();
@@ -12,6 +9,14 @@
 	// Run Query
 
 	$posts = $db->select($query);
+
+  // Create Query
+	$query= "SELECT * FROM categories";
+
+  // Run Query
+
+	$categories = $db->select($query);
+
 ?>
 
 <?php if($posts) : ?>
