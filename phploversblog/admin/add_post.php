@@ -11,6 +11,27 @@ $query= "SELECT * FROM categories";
 $categories = $db->select($query);
 
 ?>
+<?php
+	if (isset($_POST['submit'])){
+		//Assign Vars
+		$title = mysqli_real_escape_string($db->link, $_POST['title']);
+		$body = mysqli_real_escape_string($db->link, $_POST['body']);
+		$category = mysqli_real_escape_string($db->link, $_POST['category']);
+		$author = mysqli_real_escape_string($db->link, $_POST['author']);
+		$tags = mysqli_real_escape_string($db->link, $_POST['tags']);
+		//Simple validation
+
+		if ($title == '' || $body == '' || $category == '' || $author == '' || $tags == ''){
+			//Set Error
+			$error = "Please fill out all the required fields";
+		}else{
+			$query = "INSERT INTO posts(title, body, category, author, tags)
+						VALUES ('$title', '$body', '$category', '$author', '$tags')" ;
+					$insert_row = $db->insert($query);
+		}
+	}
+
+?>
 	<form action="add_post.php" method="post">
   <div class="form-group">
     <label>Post Title</label>

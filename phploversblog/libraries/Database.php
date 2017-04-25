@@ -92,7 +92,7 @@
 
 			// Validate insert
 			if($delete_row){
-				header("Location:index.php?msg=".urlencode('Record Updated'));
+				header("Location:index.php?msg=".urlencode('Record Deleted'));
 				exit();
 			}else{
 				die('Error : ('. $this->link->erno . ') ' . $this->link->error);
