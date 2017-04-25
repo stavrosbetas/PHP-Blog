@@ -18,8 +18,28 @@ $query= "SELECT * FROM categories";
 $categories = $db->select($query);
 
 ?>
-	<form>
-  <div class="form-group" method="post" action="edit_category.php">
+<?php
+	if (isset($_POST['submit'])){
+		//Assign Vars
+		$name = mysqli_real_escape_string($db->link, $_POST['name']);
+		//Simple validation
+
+		if ($name == ''){
+			//Set Error
+			$error = "Please fill out all the required field";
+		}else{
+			$query = "UPDATE categories
+						SET name = '$name'
+							WHERE id = ".$id ;
+
+					$update_row = $db->update($query);
+		}
+	}
+
+?>
+
+	<form method="post" action="edit_category.php?id=<?php echo $id; ?>">
+  <div class="form-group" >
     <label>Category Name</label>
 				<input name="name" type="text" class="form-control" placeholder="Enter Title" value="<?php echo $category['name']; ?>">
 		</div>
