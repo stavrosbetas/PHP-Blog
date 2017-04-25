@@ -34,11 +34,11 @@
 			$error = "Please fill out all the required fields";
 		}else{
 			$query = "UPDATE posts
-						SET title = $title
-							body = $body
-							category = $category
-							author = $author
-							tags = $tags
+						SET title = '$title',
+							body = '$body',
+							category = '$category',
+							author = '$author',
+							tags = '$tags'
 							WHERE id = ".$id ;
 
 					$update_row = $db->update($query);
@@ -68,7 +68,7 @@
 					}
 					?>
 
-	<option <?php echo $selected; ?>><?php echo $row['name']; ?></option>
+	<option value= <?php echo $row['id']; ?><?php echo $selected; ?>><?php echo $row['name']; ?></option>
 <?php endwhile;?>
 	</select>
   </div>
